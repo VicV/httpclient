@@ -27,10 +27,10 @@
 
 package org.apache.http.entity.mime.content;
 
+import org.apache.http.entity.mime.util.Args;
+
 import java.nio.charset.Charset;
 
-import org.apache.http.entity.ContentType;
-import org.apache.http.util.Args;
 
 /**
  *

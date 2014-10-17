@@ -26,12 +26,11 @@
  */
 package org.apache.http.entity.mime.content;
 
+import org.apache.http.entity.mime.MIME;
+import org.apache.http.entity.mime.util.Args;
+
 import java.io.IOException;
 import java.io.OutputStream;
-
-import org.apache.http.entity.ContentType;
-import org.apache.http.entity.mime.MIME;
-import org.apache.http.util.Args;
 
 /**
  * Binary body part backed by a byte array.
@@ -42,74 +41,80 @@ import org.apache.http.util.Args;
  */
 public class ByteArrayBody extends AbstractContentBody {
 
-    /**
-     * The contents of the file contained in this part.
-     */
-    private final byte[] data;
+	/**
+	 * The contents of the file contained in this part.
+	 */
+	private final byte[] data;
 
-    /**
-     * The name of the file contained in this part.
-     */
-    private final String filename;
+	/**
+	 * The name of the file contained in this part.
+	 */
+	private final String filename;
 
-    /**
-     * Creates a new ByteArrayBody.
-     *
-     * @param data The contents of the file contained in this part.
-     * @param mimeType The MIME type of the file contained in this part.
-     * @param filename The name of the file contained in this part.
-     *
-     * @deprecated (4.3) use {@link ByteArrayBody#ByteArrayBody(byte[], ContentType, String)}
-     *   or {@link org.apache.http.entity.mime.MultipartEntityBuilder}
-     */
-    @Deprecated
-    public ByteArrayBody(final byte[] data, final String mimeType, final String filename) {
-        this(data, ContentType.create(mimeType), filename);
-    }
+	/**
+	 * Creates a new ByteArrayBody.
+	 *
+	 * @param data
+	 *            The contents of the file contained in this part.
+	 * @param mimeType
+	 *            The MIME type of the file contained in this part.
+	 * @param filename
+	 *            The name of the file contained in this part.
+	 *
+	 * @deprecated (4.3) use {@link ByteArrayBody#ByteArrayBody(byte[], ContentType, String)} or
+	 *             {@link org.apache.http.entity.mime.MultipartEntityBuilder}
+	 */
+	@Deprecated
+	public ByteArrayBody(final byte[] data, final String mimeType, final String filename) {
+		this(data, ContentType.create(mimeType), filename);
+	}
 
-    /**
-     * @since 4.3
-     */
-    public ByteArrayBody(final byte[] data, final ContentType contentType, final String filename) {
-        super(contentType);
-        Args.notNull(data, "byte[]");
-        this.data = data;
-        this.filename = filename;
-    }
+	/**
+	 * @since 4.3
+	 */
+	public ByteArrayBody(final byte[] data, final ContentType contentType, final String filename) {
+		super(contentType);
+		Args.notNull(data, "byte[]");
+		this.data = data;
+		this.filename = filename;
 
-    /**
-     * Creates a new ByteArrayBody.
-     *
-     * @param data The contents of the file contained in this part.
-     * @param filename The name of the file contained in this part.
-     */
-    public ByteArrayBody(final byte[] data, final String filename) {
-        this(data, "application/octet-stream", filename);
-    }
+	}
 
-    @Override
-    public String getFilename() {
-        return filename;
-    }
+	/**
+	 * Creates a new ByteArrayBody.
+	 *
+	 * @param data
+	 *            The contents of the file contained in this part.
+	 * @param filename
+	 *            The name of the file contained in this part.
+	 */
+	public ByteArrayBody(final byte[] data, final String filename) {
+		this(data, "application/octet-stream", filename);
+	}
 
-    @Override
-    public void writeTo(final OutputStream out) throws IOException {
-        out.write(data);
-    }
+	@Override
+	public String getFilename() {
+		return filename;
+	}
 
-    @Override
-    public String getCharset() {
-        return null;
-    }
+	@Override
+	public void writeTo(final OutputStream out) throws IOException {
+		out.write(data);
+	}
 
-    @Override
-    public String getTransferEncoding() {
-        return MIME.ENC_BINARY;
-    }
+	@Override
+	public String getCharset() {
+		return null;
+	}
 
-    @Override
-    public long getContentLength() {
-        return data.length;
-    }
+	@Override
+	public String getTransferEncoding() {
+		return MIME.ENC_BINARY;
+	}
+
+	@Override
+	public long getContentLength() {
+		return data.length;
+	}
 
 }

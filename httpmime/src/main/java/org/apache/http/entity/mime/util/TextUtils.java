@@ -25,30 +25,51 @@
  *
  */
 
-package org.apache.http.entity.mime;
-
-
-import org.apache.http.entity.mime.content.Consts;
-
-import java.nio.charset.Charset;
+package org.apache.http.entity.mime.util;
 
 /**
- *
- * @since 4.0
+ * @since 4.3
  */
-public final class MIME {
+public final class TextUtils {
 
-    public static final String CONTENT_TYPE          = "Content-Type";
-    public static final String CONTENT_TRANSFER_ENC  = "Content-Transfer-Encoding";
-    public static final String CONTENT_DISPOSITION   = "Content-Disposition";
+    /**
+     * Returns true if the parameter is null or of zero length
+     */
+    public static boolean isEmpty(final CharSequence s) {
+        if (s == null) {
+            return true;
+        }
+        return s.length() == 0;
+    }
 
-    public static final String ENC_8BIT              = "8bit";
-    public static final String ENC_BINARY            = "binary";
+    /**
+     * Returns true if the parameter is null or contains only whitespace
+     */
+    public static boolean isBlank(final CharSequence s) {
+        if (s == null) {
+            return true;
+        }
+        for (int i = 0; i < s.length(); i++) {
+            if (!Character.isWhitespace(s.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
 
-    /** The default character set to be used, i.e. "US-ASCII" */
-    public static final Charset DEFAULT_CHARSET      = Consts.ASCII;
-
-    /** UTF-8 is used for RFC6532 */
-    public static final Charset UTF8_CHARSET         = Consts.UTF_8;
+    /**
+     * @since 4.4
+     */
+    public static boolean containsBlanks(final CharSequence s) {
+        if (s == null) {
+            return false;
+        }
+        for (int i = 0; i < s.length(); i++) {
+            if (Character.isWhitespace(s.charAt(i))) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

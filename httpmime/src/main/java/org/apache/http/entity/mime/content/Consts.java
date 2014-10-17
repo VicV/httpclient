@@ -25,30 +25,27 @@
  *
  */
 
-package org.apache.http.entity.mime;
-
-
-import org.apache.http.entity.mime.content.Consts;
+package org.apache.http.entity.mime.content;
 
 import java.nio.charset.Charset;
 
 /**
+ * Commons constants.
  *
- * @since 4.0
+ * @since 4.2
  */
-public final class MIME {
+public final class Consts {
 
-    public static final String CONTENT_TYPE          = "Content-Type";
-    public static final String CONTENT_TRANSFER_ENC  = "Content-Transfer-Encoding";
-    public static final String CONTENT_DISPOSITION   = "Content-Disposition";
+    public static final int CR = 13; // <US-ASCII CR, carriage return (13)>
+    public static final int LF = 10; // <US-ASCII LF, linefeed (10)>
+    public static final int SP = 32; // <US-ASCII SP, space (32)>
+    public static final int HT = 9;  // <US-ASCII HT, horizontal-tab (9)>
 
-    public static final String ENC_8BIT              = "8bit";
-    public static final String ENC_BINARY            = "binary";
+    public static final Charset UTF_8 = Charset.forName("UTF-8");
+    public static final Charset ASCII = Charset.forName("US-ASCII");
+    public static final Charset ISO_8859_1 = Charset.forName("ISO-8859-1");
 
-    /** The default character set to be used, i.e. "US-ASCII" */
-    public static final Charset DEFAULT_CHARSET      = Consts.ASCII;
-
-    /** UTF-8 is used for RFC6532 */
-    public static final Charset UTF8_CHARSET         = Consts.UTF_8;
+    private Consts() {
+    }
 
 }
